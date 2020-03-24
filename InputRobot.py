@@ -7,14 +7,8 @@ from array import array
 
 def listToString(s):
     str1 = ''
-    for char in str(s):
-        if char == '[' or char == ']' or char == ')' or char == "'" or char == ',':
-            str1 += ''
-        if char == '(':
-            str1 += '\n'
-        else:
-            str1 += char
-    print(str1)
+    for element in s:
+        str1 += element[0] + '\n'
     return str1
 
 
@@ -42,7 +36,7 @@ finally:
 
     time.sleep(2)
 
-    text_list = listToString(str(records))
+    text_list = listToString(records)
 
     for char in text_list:
         keyboard.press(char)
