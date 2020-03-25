@@ -5,14 +5,13 @@ import os
 from pynput.keyboard import Key, Controller
 from mysql.connector import Error
 from array import array
-
+from threading import Thread
 
 def listToString(s):
     str1 = ''
     for element in s:
         str1 += element[0] + '\n'
     return str1
-
 
 try:
     connection = mysql.connector.connect(
@@ -29,7 +28,6 @@ try:
         cursor.execute(sql_select_Query)
         records = cursor.fetchall()
 
-
 except mysql.connector.Error as error:
     records = "Se conecto de forma erronea"
 finally:
@@ -40,8 +38,6 @@ finally:
 
                 keyboard_aux = Controller()
 
-                # time.sleep(2)
-
                 text_list = listToString(records)
 
                 for char in text_list:
@@ -50,6 +46,9 @@ finally:
                     time.sleep(0.02)
                     if keyboard.is_pressed('f8'):
                         break
+                    if keyboard.is_pressed('f6'):
+                        while(keyboard.is_pressed('f7') == False):
+                            print("Esperando a que aprete F7")
                 break
 
         except KeyboardInterrupt:
