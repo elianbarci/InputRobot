@@ -48,7 +48,7 @@ finally:
                         break
                     if keyboard.is_pressed('f6'):
                         while(keyboard.is_pressed('f7') == False):
-                            print("Esperando a que aprete F7")
+                            pass
                 break
 
         except KeyboardInterrupt:
