@@ -1,5 +1,7 @@
 import time
 import mysql.connector
+import keyboard
+import os
 from pynput.keyboard import Key, Controller
 from mysql.connector import Error
 from array import array
@@ -32,13 +34,24 @@ except mysql.connector.Error as error:
     records = "Se conecto de forma erronea"
 finally:
 
-    keyboard = Controller()
+    while True:
+        try:
+            if keyboard.is_pressed('f7'):
 
-    time.sleep(2)
+                keyboard_aux = Controller()
 
-    text_list = listToString(records)
+                # time.sleep(2)
 
-    for char in text_list:
-        keyboard.press(char)
-        keyboard.release(char)
-        time.sleep(0.12)
+                text_list = listToString(records)
+
+                for char in text_list:
+                    keyboard_aux.press(char)
+                    keyboard_aux.release(char)
+                    time.sleep(0.02)
+                    if keyboard.is_pressed('f8'):
+                        break
+                break
+
+        except KeyboardInterrupt:
+
+            break
